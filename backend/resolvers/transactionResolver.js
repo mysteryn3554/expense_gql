@@ -1,7 +1,7 @@
 import Transaction from "../models/transactionModel.js"
 const transactionResolver = {
     Query: {
-        transactions: async(_,_,context)=>{
+        transactions: async(_, __context)=>{
             try{
                 if (!context,getUser()) throw new Error("unauthorized")
 
@@ -35,7 +35,7 @@ const transactionResolver = {
 
             await newTransaction.save()
         },
-        updateTransaction: async(_,{input},_)=>{
+        updateTransaction: async(_,{input},__)=>{
 
             try {
                 const updatedTransaction=await Transaction.findByIdAndUpdate(input.transactionId,input,{new:true});
