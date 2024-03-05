@@ -25,7 +25,7 @@ const Card = ({ transaction }) => {
     const location = transaction.location || "Not specified";
     const description = transaction.description.charAt(0).toUpperCase() + transaction.description.slice(1);
 
-    const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION, { refetchQueries: ["GetTransactions"] });
+    const [deleteTransaction, { loading }] = useMutation(DELETE_TRANSACTION, { refetchQueries: ["GetTransactions","GetCategoryStatistics"] });
     const handleDelete = async () => {
         try {
             await deleteTransaction({variables:{transactionId:transaction._id}})

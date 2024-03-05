@@ -71,6 +71,7 @@ const userResolver = {
 		authUser: async (_, __, context) => {
 			try {
 				const user = await context.getUser();
+				console.log("User",user)
 				return user;
 			} catch (err) {
 				console.error("Error in authUser: ", err);
