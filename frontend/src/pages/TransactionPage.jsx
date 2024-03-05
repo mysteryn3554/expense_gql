@@ -14,6 +14,7 @@ const TransactionPage = () => {
 		e.preventDefault();
 		console.log("formData", formData);
 	};
+
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevFormData) => ({
