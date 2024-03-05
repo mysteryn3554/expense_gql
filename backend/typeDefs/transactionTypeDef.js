@@ -11,7 +11,7 @@ const transactionTypeDef = `#graphql
   }
 
   type Query {
-    transactions: [Transaction!]
+    getTransactions: [Transaction!]
     transaction(transactionId:ID!): Transaction
     # TODO => ADD categoryStatistics query
   }
