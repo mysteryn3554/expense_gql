@@ -21,7 +21,7 @@ const Card = ({ transaction }) => {
     const category = transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1);
     const paymentType = transaction.paymentType.charAt(0).toUpperCase() + transaction.paymentType.slice(1);
     const amount = `Rs.${transaction.amount}`;
-    const date = new Date(transaction.date).toDateString();
+    const date = new Date(+transaction.date).toISOString().split("T")[0];
     const location = transaction.location || "Not specified";
     const description = transaction.description.charAt(0).toUpperCase() + transaction.description.slice(1);
 
@@ -66,7 +66,7 @@ const Card = ({ transaction }) => {
                 </p>
                 <div className="flex justify-between items-center">
                     <p className="text-xs text-black font-bold">{date}</p>
-                    <img src={"https://tecdn.b-cdn.net/img/new/avatars/2.webp"} className="h-8 w-8 border rounded-full" alt="" />
+                    <img src={transaction.user.profilePicture} className="h-8 w-8 border rounded-full" alt="" />
                 </div>
             </div>
         </div>

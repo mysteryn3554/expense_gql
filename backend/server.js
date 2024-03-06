@@ -10,7 +10,7 @@ import connectMongo from "connect-mongodb-session";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-
+import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled';
 import { buildContext } from "graphql-passport";
 
 import mergedResolvers from "./resolvers/mergedResolver.js";
@@ -18,12 +18,15 @@ import mergedTypeDefs from "./typeDefs/mergedTypeDef.js";
 
 import { connectDB } from "./db/connectDB.js";
 import { configurePassport } from "./passport/passport.config.js";
+import path from "path";
 
 dotenv.config();
 configurePassport();
 
 const app = express();
 
+// const __dirname=path.resolve();
+// console.log(path.join(__dirname,"../frontend/dist","index.html"))
 const httpServer = http.createServer(app);
 
 const MongoDBStore = connectMongo(session);
@@ -75,6 +78,12 @@ app.use(
 		context: async ({ req, res }) => buildContext({ req, res }),
 	})
 );
+
+// app.use(express.static(path.join(__dirname,"../frontend/dist")));
+
+// app.get("*",(req,res)=>{
+// 	res.sendFile(path.join(__dirname,"../frontend/dist","index.html"));
+// })
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));

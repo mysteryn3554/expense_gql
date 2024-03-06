@@ -1,4 +1,5 @@
 import Transaction from "../models/transactionModel.js";
+import User from "../models/userModel.js";
 
 const transactionResolver = {
 	Query: {
@@ -38,9 +39,9 @@ const transactionResolver = {
 				}
 				categoryMap[transaction.category]+=transaction.amount
 			})
-			console.log(categoryMap)
+			// console.log(categoryMap)
 			const ans=Object.entries(categoryMap).map(([category,totalAmount])=>({category,totalAmount}))
-			console.log(ans)
+			// console.log(ans)
 			return ans
 		}
 		// TODO => ADD categoryStatistics query
@@ -81,7 +82,13 @@ const transactionResolver = {
 			}
 		},
 	},
-	// TODO => ADD TRANSACTION/USER RELATIONSHIP
+	Transaction:{
+		user: async (parent) => {
+			const userId = parent.userId;
+			const user=await User.findById(userId);
+			return user;
+		}
+	}
 };
 
 export default transactionResolver;
