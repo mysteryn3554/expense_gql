@@ -1,21 +1,22 @@
-import cron from "cron";
-import https from "https";
+const cron = require("cron");
 
-const URL = "https://expense-gql.onrender.com/api/health-check";
+const URL = "https://expense-gql-p8yo.onrender.com/api/health-check";
 
-const job = new cron.CronJob("*/1 * * * *", function () {
-    console.log("Job triggered")
-	https
-        .get(URL, (res) => {
-            if (res.statusCode === 200) {
-                console.log("GET request sent successfully");
-            } else {
-                console.log("GET request failed", res.statusCode);
-            }
-        })
-        .on("error", (e) => {
-            console.error("Error while sending request", e);
-        });
+const job = new cron.CronJob("*/1 * * * *", async function () { 
+    console.log("Job started")
+    console.log("Sending GET request to:", URL);
+    try {
+        const response = await fetch(URL);
+        if (response.ok) {
+            console.log("GET request sent successfully");
+            console.log("Response:", await response.json());
+        } else {
+            console.warn("GET request failed with status:", response.status);
+
+        }
+    } catch (error) {
+        console.error("Error while sending request:", error);
+    }
 });
 
-export default job;
+module.exports=job;
