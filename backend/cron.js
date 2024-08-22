@@ -1,7 +1,7 @@
 import cron from "cron";
 import https from "https";
 
-const URL = "https://expense-gql.onrender.com";
+const URL = "https://expense-gql.onrender.com/api/health-check";
 
 const job = new cron.CronJob("*/1 * * * *", function () {
     console.log("Job triggered")
