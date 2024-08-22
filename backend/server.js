@@ -78,7 +78,10 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
+app.get('/api/health-check',(req,res)=>{
+    console.log("Server Healthy");
+    res.status(200).json({message:"Server Healthy"})
+})
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 });
