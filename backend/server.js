@@ -20,7 +20,7 @@ import { connectDB } from "./db/connectDB.js";
 import { configurePassport } from "./passport/passport.config.js";
 import path from "path";
 
-const job = require("./cronJob.js");
+import { job } from "./cronJob.js";
 
 dotenv.config();
 configurePassport();
