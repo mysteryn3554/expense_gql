@@ -1,4 +1,4 @@
-const cron = require("cron");
+import cron from "cron";
 
 const URL = "https://expense-gql-p8yo.onrender.com/api/health-check";
 
