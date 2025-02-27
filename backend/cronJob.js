@@ -2,7 +2,7 @@ const cron = require("cron");
 
 const URL = "https://expense-gql-p8yo.onrender.com/api/health-check";
 
-const job = new cron.CronJob("*/1 * * * *", async function () { 
+export const job = new cron.CronJob("*/1 * * * *", async function () { 
     console.log("Job started")
     console.log("Sending GET request to:", URL);
     try {
@@ -19,4 +19,3 @@ const job = new cron.CronJob("*/1 * * * *", async function () {
     }
 });
 
-module.exports=job;
